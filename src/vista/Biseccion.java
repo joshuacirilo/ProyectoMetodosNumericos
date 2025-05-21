@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.MetodoBiseccionControlador;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author moralesjs_
@@ -12,13 +16,43 @@ public class Biseccion extends javax.swing.JFrame {
 
     /**
      * Creates new form Biseccion
-     */ 
+     */
     public Biseccion() {
         initComponents();
-        this.setTitle("Método Biseccion");
+        this.setTitle("Método Bisección");
         this.setLocationRelativeTo(null);
-        
-    } 
+        this.setEnabled(true); // ¡Asegúrate de que esta línea esté presente y en 'true'!
+        Tolerancia.setText("0.0001"); // Establece el texto
+        Tolerancia.setEditable(false); // <--- Hace el campo no editable
+
+    }
+
+// Métodos para que el controlador acceda a los componentes de la vista
+    public JTextField getFuncion() {
+        return Funcion;
+    }
+
+    public JTextField getTolerancia() { // Asegúrate de que este método exista si tienes un JTextField para la tolerancia
+        return Tolerancia;
+    }
+
+    public JTextField getIntervalos() { // Este es tu getIntervaloA
+        return Intervalos;
+    }
+
+    public JTextField getIntervalos1() { // Este es tu getIntervaloB
+        return Intervalos1;
+    }
+
+    public JTable getTabla1() {
+        return Tabla1;
+    }
+
+    // Este setTabla1 no es estrictamente necesario si solo modificas el modelo de la tabla,
+    // pero si lo necesitas, déjalo.
+    public void setTabla1(JTable Tabla1) {
+        this.Tabla1 = Tabla1;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +120,23 @@ public class Biseccion extends javax.swing.JFrame {
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Funcion.setText("F(x)");
+        Funcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FuncionActionPerformed(evt);
+            }
+        });
+
+        Tolerancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToleranciaActionPerformed(evt);
+            }
+        });
+
+        Intervalos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IntervalosActionPerformed(evt);
+            }
+        });
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,6 +230,12 @@ public class Biseccion extends javax.swing.JFrame {
         Calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalcularActionPerformed(evt);
+            }
+        });
+
+        Intervalos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Intervalos1ActionPerformed(evt);
             }
         });
 
@@ -283,13 +340,33 @@ public class Biseccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:  
+        MetodoBiseccionControlador vamos = new MetodoBiseccionControlador(this);
+        vamos.calcularBiseccion();
     }//GEN-LAST:event_CalcularActionPerformed
 
     private void Calcular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular2ActionPerformed
         // TODO add your handling code here:
+        Menu vi = new Menu();
+        vi.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_Calcular2ActionPerformed
+
+    private void FuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuncionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FuncionActionPerformed
+
+    private void ToleranciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToleranciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ToleranciaActionPerformed
+
+    private void IntervalosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntervalosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IntervalosActionPerformed
+
+    private void Intervalos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Intervalos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Intervalos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,16 +382,24 @@ public class Biseccion extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Biseccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Biseccion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Biseccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Biseccion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Biseccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Biseccion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Biseccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Biseccion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -61,6 +61,7 @@ public class ReglaFalsa extends javax.swing.JFrame {
         Tabla1 = new javax.swing.JTable();
         Calcular = new javax.swing.JButton();
         Intervalos1 = new javax.swing.JTextField();
+        btMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -101,7 +102,6 @@ public class ReglaFalsa extends javax.swing.JFrame {
         jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        Funcion.setText("F(x)");
         Funcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FuncionActionPerformed(evt);
@@ -154,6 +154,13 @@ public class ReglaFalsa extends javax.swing.JFrame {
             }
         });
 
+        btMenu.setText("Menu");
+        btMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,6 +193,10 @@ public class ReglaFalsa extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(558, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btMenu)
+                .addGap(189, 189, 189))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +223,9 @@ public class ReglaFalsa extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Calcular)))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addComponent(btMenu)
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,6 +265,13 @@ public class ReglaFalsa extends javax.swing.JFrame {
     private void Intervalos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Intervalos1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Intervalos1ActionPerformed
+
+    private void btMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMenuActionPerformed
+        // TODO add your handling code here:
+        Menu vi = new Menu();
+        vi.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +315,7 @@ public class ReglaFalsa extends javax.swing.JFrame {
     private javax.swing.JTextField Intervalos1;
     private javax.swing.JTable Tabla1;
     private javax.swing.JTextField Tolerancia;
+    private javax.swing.JButton btMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

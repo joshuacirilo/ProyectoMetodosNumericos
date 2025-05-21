@@ -249,10 +249,19 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="F(x)"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FuncionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="Tolerancia">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToleranciaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="Intervalos">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IntervalosActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -487,6 +496,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="Intervalos1">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Intervalos1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Calcular2">
           <Properties>

@@ -93,6 +93,11 @@
                   </Group>
                   <EmptySpace pref="558" max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btMenu" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -125,7 +130,9 @@
                           <Component id="Calcular" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="235" max="32767" attributes="0"/>
+                  <EmptySpace pref="177" max="32767" attributes="0"/>
+                  <Component id="btMenu" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -231,9 +238,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Funcion">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="F(x)"/>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FuncionActionPerformed"/>
           </Events>
@@ -331,6 +335,14 @@
         <Component class="javax.swing.JTextField" name="Intervalos1">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Intervalos1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Menu"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMenuActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

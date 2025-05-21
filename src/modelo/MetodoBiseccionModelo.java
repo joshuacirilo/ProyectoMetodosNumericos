@@ -2,140 +2,118 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package modelo;
+
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import java.text.DecimalFormat;
 
 public class MetodoBiseccionModelo {
-    private String funcion;
-    private ScriptEngine engine; // Reutilizar el ScriptEngine
 
-    /**
-     * Constructor para inicializar el modelo con la función a evaluar.
-     * Se inicializa el ScriptEngine aquí para mejorar el rendimiento al reutilizarlo.
-     * @param funcion La función matemática como una cadena de texto (ej. "x^2 - 4").
-     */
-    public MetodoBiseccionModelo(String funcion) {
-        this.funcion = funcion;
-        // Inicializar el ScriptEngine una sola vez
-        ScriptEngineManager manager = new ScriptEngineManager();
-        this.engine = manager.getEngineByName("JavaScript");
-        if (this.engine == null) {
-            System.err.println("Error: El motor de JavaScript no está disponible. Asegúrate de usar un JRE completo.");
+    private String funcionStr;
+    private Expression expression;
+    private boolean funcionValida;
+
+    public MetodoBiseccionModelo(String funcionStr) {
+        this.funcionStr = funcionStr;
+        this.funcionValida = false;
+
+        try {
+            this.expression = new ExpressionBuilder(funcionStr)
+                                .variables("x")
+                                .build();
+            this.funcionValida = true;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al parsear la función: " + e.getMessage());
+            this.expression = null;
+            this.funcionValida = false;
+        } catch (Exception e) {
+            System.err.println("Error inesperado al construir la expresión: " + e.getMessage());
+            this.expression = null;
+            this.funcionValida = false;
         }
     }
 
-    /**
-     * Aplica el método de Bisección para encontrar una raíz de la función dentro de un intervalo dado.
-     * @param a Límite inferior del intervalo.
-     * @param b Límite superior del intervalo.
-     * @param toleranciaCriterio La tolerancia o criterio de parada para el error de aproximación y el valor de f(xm).
-     * @param maxIteraciones El número máximo de iteraciones para evitar bucles infinitos.
-     * @return Una lista de arreglos de Object, donde cada arreglo representa una fila de resultados de la iteración.
-     * Retorna null si el intervalo inicial es inválido (f(a) y f(b) no tienen signos opuestos).
-     */
-    public List<Object[]> biseccion(double a, double b, double toleranciaCriterio, int maxIteraciones) {
+    public boolean isFunctionValid() {
+        return funcionValida;
+    }
+
+    public double evaluarFuncion(double x) {
+        if (!funcionValida || expression == null) {
+            throw new IllegalStateException("La función no es válida y no puede ser evaluada.");
+        }
+        expression.setVariable("x", x);
+        return expression.evaluate();
+    }
+
+    public List<Object[]> biseccion(double a, double b, double tolerancia, int maxIteraciones) {
         List<Object[]> resultados = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("0.0000");
 
-        double fa = evaluarFuncion(a);
-        double fb = evaluarFuncion(b);
-
-        // Manejo de errores iniciales en la evaluación de la función
-        if (Double.isNaN(fa) || Double.isNaN(fb)) {
-            System.out.println("Error: No se pudo evaluar la función en los límites iniciales a o b.");
+        if (!funcionValida) {
+            System.err.println("No se puede realizar la bisección: la función es inválida.");
             return null;
         }
 
-        // Validación fundamental para el método de Bisección
+        double fa, fb;
+        try {
+            fa = evaluarFuncion(a);
+            fb = evaluarFuncion(b);
+        } catch (RuntimeException e) { // <--- ¡CORRECCIÓN AQUÍ! Solo RuntimeException
+            // RuntimeException ya cubre IllegalStateException
+            System.err.println("Error al evaluar f(a) o f(b): " + e.getMessage());
+            return null;
+        }
+
         if (fa * fb >= 0) {
-            System.out.println("Error: f(a) y f(b) tienen el mismo signo o uno es cero. " +
-                               "El método de Bisección no puede garantizar una raíz en este intervalo.");
+            System.err.println("f(a) y f(b) tienen el mismo signo. No se puede garantizar una raíz en el intervalo.");
             return null;
         }
 
-        double xm = 0; // Punto medio
-        double fxm = 0; // f(xm)
-        double errorAproximacion = Double.MAX_VALUE; // Inicializar con un valor grande
-        int iteracion = 1;
+        double xr = 0;
+        double fxr = 0;
+        double errorIteracion = Math.abs(b - a);
 
-        // Bucle principal del método de Bisección
-        while (Math.abs(errorAproximacion) > toleranciaCriterio && iteracion <= maxIteraciones) {
-            xm = (a + b) / 2; // Cálculo del punto medio
-            fxm = evaluarFuncion(xm);
-
-            if (Double.isNaN(fxm)) {
-                System.out.println("Error: No se pudo evaluar la función en el punto medio (xm).");
+        for (int i = 0; i < maxIteraciones; i++) {
+            xr = (a + b) / 2;
+            
+            try {
+                fxr = evaluarFuncion(xr);
+            } catch (RuntimeException e) { // <--- ¡CORRECCIÓN AQUÍ! Solo RuntimeException
+                // RuntimeException ya cubre IllegalStateException
+                System.err.println("Error al evaluar f(xr) en iteración " + (i + 1) + ": " + e.getMessage());
                 return null;
             }
 
-            // Calcula el error de aproximación (puede ser el ancho del intervalo o |xm - xm_anterior|)
-            // Aquí usamos el ancho del nuevo intervalo para ser coherente con la naturaleza de bisección
-            errorAproximacion = Math.abs(b - a); // O también Math.abs(xm - xmAnterior) si se guarda
+            errorIteracion = Math.abs(b - a) / 2;
 
-            // Guarda la fila como arreglo de Object
-            Object[] fila = new Object[] {
-                iteracion,
-                String.format("%.6f", a),
-                String.format("%.6f", b),
-                String.format("%.6f", xm),
-                String.format("%.6f", fa), // Incluimos f(a)
-                String.format("%.6f", fb), // Incluimos f(b)
-                String.format("%.6f", fxm),
-                String.format("%.6f", errorAproximacion)
-            };
-            resultados.add(fila);
+            resultados.add(new Object[]{
+                i + 1,
+                df.format(a),
+                df.format(b),
+                df.format(fa),
+                df.format(fb),
+                df.format(xr),
+                df.format(fxr),
+                df.format(errorIteracion)
+            });
 
-            // Criterio de parada adicional: si f(xm) es muy cercano a cero
-            if (Math.abs(fxm) < toleranciaCriterio) {
-                break; // Se encontró una raíz con la tolerancia deseada
+            if (Math.abs(fxr) < tolerancia || errorIteracion < tolerancia) {
+                break;
             }
 
-            // Actualiza los límites del intervalo
-            if (fa * fxm < 0) {
-                b = xm;
-                fb = fxm; // Actualiza f(b)
+            if (fa * fxr < 0) {
+                b = xr;
+                fb = fxr;
             } else {
-                a = xm;
-                fa = fxm; // Actualiza f(a)
+                a = xr;
+                fa = fxr;
             }
-
-            iteracion++;
         }
+
         return resultados;
-    }
-
-    /**
-     * Método privado para evaluar la función en un punto 'x' utilizando el ScriptEngine.
-     * @param x El valor en el cual evaluar la función.
-     * @return El resultado de la evaluación de la función en 'x', o Double.NaN si ocurre un error.
-     */
-    private double evaluarFuncion(double x) {
-        if (engine == null) {
-            System.err.println("Error: ScriptEngine no inicializado. No se puede evaluar la función.");
-            return Double.NaN;
-        }
-        try {
-            // Asegura que solo se reemplace 'x' como variable, no dentro de palabras
-            String expr = funcion.replaceAll("\\bx\\b", "(" + x + ")");
-            Object result = engine.eval(expr);
-
-            if (result instanceof Number) {
-                return ((Number) result).doubleValue();
-            } else {
-                System.out.println("Error al evaluar f(x): El resultado no es un número.");
-                return Double.NaN;
-            }
-        } catch (ScriptException e) {
-            System.out.println("Error de sintaxis en la función f(x): " + e.getMessage());
-            return Double.NaN;
-        } catch (Exception e) {
-            System.out.println("Error inesperado al evaluar f(x): " + e.getMessage());
-            return Double.NaN;
-        }
     }
 }
