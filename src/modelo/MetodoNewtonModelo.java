@@ -4,122 +4,126 @@
  */
 package modelo;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.ArrayList;
 import java.util.List;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import java.text.DecimalFormat;
 
 public class MetodoNewtonModelo {
-    private String funcion;
-    private String derivadaFuncion; // Nueva propiedad para la derivada
-    private ScriptEngine engine; // Reutilizar el ScriptEngine
 
-    /**
-     * Constructor para inicializar el modelo con la función y su derivada a evaluar.
-     * Se inicializa el ScriptEngine aquí para mejorar el rendimiento al reutilizarlo.
-     * @param funcion La función matemática como una cadena de texto (ej. "x^2 - 4").
-     * @param derivadaFuncion La derivada de la función matemática como una cadena de texto (ej. "2*x").
-     */
-    public MetodoNewtonModelo(String funcion, String derivadaFuncion) {
-        this.funcion = funcion;
-        this.derivadaFuncion = derivadaFuncion;
-        // Inicializar el ScriptEngine una sola vez
-        ScriptEngineManager manager = new ScriptEngineManager();
-        this.engine = manager.getEngineByName("JavaScript");
-        if (this.engine == null) {
-            System.err.println("Error: El motor de JavaScript no está disponible. Asegúrate de usar un JRE completo.");
-        }
-    }
+    private String funcionStr;
+    private String derivadaStr; // ¡NUEVO! Para la función derivada
+    private Expression funcionExpression;
+    private Expression derivadaExpression; // ¡NUEVO! Para la expresión derivada
+    private boolean funcionesValidas; // Ahora valida ambas funciones
 
-    /**
-     * Aplica el método de Newton-Raphson para encontrar una raíz de la función.
-     * @param x0 El valor inicial de aproximación.
-     * @param toleranciaCriterio La tolerancia o criterio de parada para el error de aproximación y el valor de f(xi).
-     * @param maxIteraciones El número máximo de iteraciones para evitar bucles infinitos.
-     * @return Una lista de arreglos de Object, donde cada arreglo representa una fila de resultados de la iteración.
-     * Retorna null si ocurre un error durante la evaluación de la función o su derivada.
-     */
-    public List<Object[]> newtonRaphson(double x0, double toleranciaCriterio, int maxIteraciones) {
-        List<Object[]> resultados = new ArrayList<>();
+    public MetodoNewtonModelo(String funcionStr, String derivadaStr) {
+        this.funcionStr = funcionStr;
+        this.derivadaStr = derivadaStr;
+        this.funcionesValidas = false;
 
-        double xi = x0; // Aproximación actual
-        double fxi;     // Valor de la función en xi
-        double dfxi;    // Valor de la derivada en xi
-        double errorAproximacion = Double.MAX_VALUE; // Inicializar con un valor grande
-        int iteracion = 1;
-
-        // Bucle principal del método de Newton-Raphson
-        while (Math.abs(errorAproximacion) > toleranciaCriterio && iteracion <= maxIteraciones) {
-            fxi = evaluarFuncion(xi, this.funcion);
-            dfxi = evaluarFuncion(xi, this.derivadaFuncion);
-
-            // Manejo de errores durante la evaluación
-            if (Double.isNaN(fxi) || Double.isNaN(dfxi)) {
-                System.out.println("Error: No se pudo evaluar la función o su derivada en x = " + String.format("%.6f", xi));
-                return null;
-            }
-
-            // Evitar división por cero si la derivada es muy cercana a cero
-            if (Math.abs(dfxi) < 1e-9) { // Un valor pequeño para evitar la división por cero
-                System.out.println("Error: La derivada se aproxima a cero en x = " + String.format("%.6f", xi) + ". El método de Newton-Raphson podría divergir o no converger.");
-                return null; // O podrías lanzar una excepción para que el controlador la maneje.
-            }
-
-            double xi_anterior = xi; // Guarda el valor actual para calcular el error
-            xi = xi - (fxi / dfxi); // Fórmula de Newton-Raphson
-
-            errorAproximacion = Math.abs(xi - xi_anterior);
-
-            // Guarda la fila como arreglo de Object
-            Object[] fila = new Object[] {
-                iteracion,
-                String.format("%.6f", xi_anterior), // x_i-1 (anterior)
-                String.format("%.6f", fxi),         // f(x_i-1)
-                String.format("%.6f", dfxi),        // f'(x_i-1)
-                String.format("%.6f", xi),          // x_i (actual)
-                String.format("%.6f", errorAproximacion)
-            };
-            resultados.add(fila);
-
-            // Criterio de parada adicional: si f(xi) es muy cercano a cero
-            if (Math.abs(fxi) < toleranciaCriterio) { // Usamos fxi, ya que al calcular la nueva xi, la fxi anterior es la relevante
-                break; // Se encontró una raíz con la tolerancia deseada
-            }
-
-            iteracion++;
-        }
-        return resultados;
-    }
-
-    /**
-     * Método privado para evaluar una función dada en un punto 'x' utilizando el ScriptEngine.
-     * Es más genérico para poder evaluar tanto la función original como su derivada.
-     * @param x El valor en el cual evaluar la función.
-     * @param expression La expresión de la función o derivada como cadena de texto.
-     * @return El resultado de la evaluación, o Double.NaN si ocurre un error.
-     */
-    private double evaluarFuncion(double x, String expression) {
-        if (engine == null) {
-            System.err.println("Error: ScriptEngine no inicializado. No se puede evaluar la función.");
-            return Double.NaN;
-        }
         try {
-            String expr = expression.replaceAll("\\bx\\b", "(" + x + ")");
-            Object result = engine.eval(expr);
+            // Construir la expresión para la función principal
+            this.funcionExpression = new ExpressionBuilder(funcionStr)
+                                            .variables("x")
+                                            .build();
 
-            if (result instanceof Number) {
-                return ((Number) result).doubleValue();
-            } else {
-                System.out.println("Error al evaluar expresión '" + expression + "': El resultado no es un número.");
-                return Double.NaN;
-            }
-        } catch (ScriptException e) {
-            System.out.println("Error de sintaxis en la expresión '" + expression + "': " + e.getMessage());
-            return Double.NaN;
+            // Construir la expresión para la función derivada
+            this.derivadaExpression = new ExpressionBuilder(derivadaStr)
+                                            .variables("x")
+                                            .build();
+
+            this.funcionesValidas = true;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al parsear una de las funciones: " + e.getMessage());
+            this.funcionExpression = null;
+            this.derivadaExpression = null;
+            this.funcionesValidas = false;
         } catch (Exception e) {
-            System.out.println("Error inesperado al evaluar expresión '" + expression + "': " + e.getMessage());
-            return Double.NaN;
+            System.err.println("Error inesperado al construir las expresiones: " + e.getMessage());
+            this.funcionExpression = null;
+            this.derivadaExpression = null;
+            this.funcionesValidas = false;
         }
+    }
+
+    public boolean areFunctionsValid() { // Cambiado a plural
+        return funcionesValidas;
+    }
+
+    // Método para evaluar la función principal
+    public double evaluarFuncion(double x) {
+        if (!funcionesValidas || funcionExpression == null) {
+            throw new IllegalStateException("Las funciones no son válidas y no pueden ser evaluadas.");
+        }
+        funcionExpression.setVariable("x", x);
+        return funcionExpression.evaluate();
+    }
+
+    // ¡NUEVO! Método para evaluar la función derivada
+    public double evaluarDerivada(double x) {
+        if (!funcionesValidas || derivadaExpression == null) {
+            throw new IllegalStateException("Las funciones no son válidas y no pueden ser evaluadas.");
+        }
+        derivadaExpression.setVariable("x", x);
+        return derivadaExpression.evaluate();
+    }
+
+    // Método principal del Método de Newton
+    public List<Object[]> newtonRaphson(double x0, double tolerancia, int maxIteraciones) {
+        List<Object[]> resultados = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("0.0000");
+
+        if (!funcionesValidas) {
+            System.err.println("No se puede realizar Newton-Raphson: una o ambas funciones son inválidas.");
+            return null;
+        }
+
+        double xi = x0;
+        double fx = 0;
+        double fPrimaX = 0;
+        double xr = 0; // x_i+1
+        double error = Double.MAX_VALUE; // Inicializamos con un valor grande
+
+        for (int i = 0; i < maxIteraciones; i++) {
+            try {
+                fx = evaluarFuncion(xi);
+                fPrimaX = evaluarDerivada(xi);
+            } catch (RuntimeException e) {
+                System.err.println("Error al evaluar f(xi) o f'(xi) en iteración " + (i + 1) + ": " + e.getMessage());
+                return null; // O lanzar una excepción para que el controlador la maneje
+            }
+
+            if (fPrimaX == 0) {
+                System.err.println("La derivada es cero en xi = " + xi + ". No se puede continuar (división por cero).");
+                return null; // O lanzar una excepción más específica
+            }
+
+            xr = xi - (fx / fPrimaX);
+
+            // Calcular el error. Puede ser absoluto o relativo.
+            // Aquí un error absoluto entre la aproximación actual y la siguiente
+            error = Math.abs(xr - xi);
+
+            // Añadir fila de resultados
+            resultados.add(new Object[]{
+                i + 1,
+                df.format(xi),
+                df.format(fx),
+                df.format(fPrimaX),
+                df.format(xr),
+                df.format(error) // Mostrar el error calculado en la tabla
+            });
+
+            // Criterios de parada
+            if (Math.abs(fx) < tolerancia || error < tolerancia) {
+                break;
+            }
+
+            xi = xr; // Actualizar xi para la siguiente iteración
+        }
+
+        return resultados;
     }
 }

@@ -6,7 +6,6 @@ package controlador;
 
 /**
  *
- * @author luisd
  */
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

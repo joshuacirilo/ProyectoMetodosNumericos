@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.MetodoNewtonControlador;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author moralesjs_
@@ -15,6 +19,32 @@ public class MetodonNewton extends javax.swing.JFrame {
      */
     public MetodonNewton() {
         initComponents();
+        this.setTitle("Método Newton");
+        this.setLocationRelativeTo(null);
+        this.setEnabled(true);
+
+    }
+
+    public JTextField getFuncion() {
+        return Funcion;
+    }
+
+    public JTextField getXo() { // Este es tu getIntervaloA
+        return Xo;
+    }
+
+    public JTextField getDerivado() { // Este es tu getIntervaloB
+        return Derivado;
+    }
+
+    public JTable getTabla1() {
+        return Tabla1;
+    }
+
+    // Este setTabla1 no es estrictamente necesario si solo modificas el modelo de la tabla,
+    // pero si lo necesitas, déjalo.
+    public void setTabla1(JTable Tabla1) {
+        this.Tabla1 = Tabla1;
     }
 
     /**
@@ -33,8 +63,8 @@ public class MetodonNewton extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Funcion = new javax.swing.JTextField();
-        Tolerancia = new javax.swing.JTextField();
-        Intervalos = new javax.swing.JTextField();
+        Xo = new javax.swing.JTextField();
+        Derivado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         Calcular = new javax.swing.JButton();
@@ -128,8 +158,8 @@ public class MetodonNewton extends javax.swing.JFrame {
                                         .addGap(24, 24, 24)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Funcion, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(Tolerancia, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(Intervalos)))
+                                    .addComponent(Xo, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(Derivado)))
                             .addComponent(jLabel4)
                             .addComponent(Calcular))
                         .addGap(18, 18, 18)
@@ -150,11 +180,11 @@ public class MetodonNewton extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Xo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(Intervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Derivado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,10 +211,13 @@ public class MetodonNewton extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
-        // TODO add your handling code here:
+        MetodoNewtonControlador vamos = new MetodoNewtonControlador(this);
+        vamos.calcularNewton();
 
     }//GEN-LAST:event_CalcularActionPerformed
 
+    
+   
     /**
      * @param args the command line arguments
      */
@@ -222,10 +255,10 @@ public class MetodonNewton extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Calcular;
+    private javax.swing.JTextField Derivado;
     private javax.swing.JTextField Funcion;
-    private javax.swing.JTextField Intervalos;
     private javax.swing.JTable Tabla1;
-    private javax.swing.JTextField Tolerancia;
+    private javax.swing.JTextField Xo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

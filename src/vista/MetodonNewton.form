@@ -72,8 +72,8 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="Funcion" alignment="0" pref="176" max="32767" attributes="0"/>
-                                      <Component id="Tolerancia" alignment="0" pref="176" max="32767" attributes="0"/>
-                                      <Component id="Intervalos" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Xo" alignment="0" pref="176" max="32767" attributes="0"/>
+                                      <Component id="Derivado" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -102,12 +102,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="Tolerancia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Xo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Intervalos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Derivado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -151,7 +151,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -173,7 +173,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -195,7 +195,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -217,7 +217,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -226,9 +226,9 @@
             <Property name="text" type="java.lang.String" value="F(x)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Tolerancia">
+        <Component class="javax.swing.JTextField" name="Xo">
         </Component>
-        <Component class="javax.swing.JTextField" name="Intervalos">
+        <Component class="javax.swing.JTextField" name="Derivado">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
