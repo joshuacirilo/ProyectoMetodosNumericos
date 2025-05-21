@@ -5,10 +5,12 @@
 
 package modelo;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException; 
 
 public class MetodoReglaFalsaModelo {
     private String funcion;
@@ -17,38 +19,50 @@ public class MetodoReglaFalsaModelo {
         this.funcion = funcion;
     }
 
-    public List<Object[]> reglaFalsa(double a, double b) {
-        List<Object[]> resultados = new ArrayList<Object[]>();
+    public List<Object[]> reglaFalsa(double a, double b, double toleranciaCriterio) { // Agregado toleranciaCriterio
+        List<Object[]> resultados = new ArrayList<>();
 
         double fa = evaluarFuncion(a);
         double fb = evaluarFuncion(b);
 
-        if (fa * fb > 0) {
-            System.out.println("Error: f(a) y f(b) tienen el mismo signo. No se puede aplicar la Regla Falsa.");
-            return null; // Devuelve null para indicar un error
+        if (Double.isNaN(fa) || Double.isNaN(fb)) {
+            // Si la evaluación de la función falla, el error ya se imprimió en evaluarFuncion.
+            // Aquí simplemente retornamos null.
+            return null;
+        }
+
+        if (fa * fb >= 0) { // Cambiado a >= para incluir el caso donde una raíz es un límite inicial
+            System.out.println("Error: f(a) y f(b) tienen el mismo signo o uno es cero. No se puede garantizar la aplicación de la Regla Falsa.");
+            return null;
         }
 
         double xr = 0;
-        double xrAnterior = 0;
+        double xrAnterior = b; // Inicializar xrAnterior con b para la primera iteración
         double fxr = 0;
-        double tolerancia = 0;
+        double errorAproximacion = Double.MAX_VALUE; // Cambiado a un nombre más descriptivo
         int iteracion = 1;
 
-        do {
+        // Bucle do-while para asegurar al menos una iteración y la condición de parada
+        while (Math.abs(errorAproximacion) > toleranciaCriterio && iteracion <= 100) { // Usamos toleranciaCriterio del GUI
             xr = ((a * fb) - (b * fa)) / (fb - fa);
             fxr = evaluarFuncion(xr);
-            tolerancia = Math.abs(xr - xrAnterior);
+
+            if (Double.isNaN(fxr)) { // Manejar error si fxr no puede ser evaluado
+                return null;
+            }
+
+            errorAproximacion = Math.abs(xr - xrAnterior);
 
             // Guarda la fila como arreglo de Object
             Object[] fila = new Object[] {
-                    iteracion,
-                    String.format("%.6f", a), // Formatear a 6 decimales para mejor presentación
-                    String.format("%.6f", b),
-                    String.format("%.6f", fa),
-                    String.format("%.6f", fb),
-                    String.format("%.6f", xr),
-                    String.format("%.6f", fxr),
-                    String.format("%.6f", tolerancia)
+                iteracion,
+                String.format("%.6f", a),
+                String.format("%.6f", b),
+                String.format("%.6f", fa),
+                String.format("%.6f", fb),
+                String.format("%.6f", xr),
+                String.format("%.6f", fxr),
+                String.format("%.6f", errorAproximacion)
             };
             resultados.add(fila);
 
@@ -63,11 +77,15 @@ public class MetodoReglaFalsaModelo {
             xrAnterior = xr;
             iteracion++;
 
-        } while (Math.abs(fxr) > 0.001 && iteracion <= 100);
-
+            // Condición adicional para detener si la función evaluada en xr es muy cercana a cero
+            if (Math.abs(fxr) < toleranciaCriterio) {
+                break;
+            }
+        }
         return resultados;
     }
 
+    // Método privado para evaluar la función
     private double evaluarFuncion(double x) {
         try {
             ScriptEngineManager manager = new ScriptEngineManager();
@@ -77,10 +95,19 @@ public class MetodoReglaFalsaModelo {
             String expr = funcion.replaceAll("\\bx\\b", "(" + x + ")");
             Object result = engine.eval(expr);
 
-            return Double.parseDouble(result.toString());
+            // Manejar resultados que no son números (por ejemplo, si la función es inválida)
+            if (result instanceof Number) {
+                return ((Number) result).doubleValue();
+            } else {
+                System.out.println("Error al evaluar f(x): El resultado no es un número.");
+                return Double.NaN;
+            }
+        } catch (ScriptException e) {
+            System.out.println("Error de sintaxis en la función f(x): " + e.getMessage());
+            return Double.NaN; // Devuelve NaN en caso de error de sintaxis en la función
         } catch (Exception e) {
-            System.out.println("Error al evaluar f(x): " + e.getMessage());
-            return Double.NaN; // Devuelve NaN en caso de error de evaluación
+            System.out.println("Error inesperado al evaluar f(x): " + e.getMessage());
+            return Double.NaN; // Devuelve NaN en caso de otro error
         }
     }
 }

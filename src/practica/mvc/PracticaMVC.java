@@ -8,8 +8,7 @@ package practica.mvc;
  *
  * @author jciri
  */
-import controlador.InicioController;
-import vista.InicioForm;
+import vista.Inicio;
 
 public class PracticaMVC {
 
@@ -18,7 +17,7 @@ public class PracticaMVC {
      */
     public static void main(String[] args) {
 
-        InicioForm va  = new InicioForm();
+        Inicio va  = new Inicio();
         va.setVisible(true);
     }
 
