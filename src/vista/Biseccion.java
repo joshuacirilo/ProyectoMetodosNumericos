@@ -12,6 +12,9 @@ import javax.swing.JTextField;
  *
  * @author moralesjs_
  */
+
+
+//cambio 
 public class Biseccion extends javax.swing.JFrame {
 
     /**
