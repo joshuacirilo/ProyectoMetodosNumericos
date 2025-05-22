@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.MetodoSecanteControlador;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author moralesjs_
@@ -15,6 +19,33 @@ public class Secante extends javax.swing.JFrame {
      */
     public Secante() {
         initComponents();
+        this.setTitle("Método Bisección");
+        this.setLocationRelativeTo(null);
+        this.setEnabled(true);
+    }
+
+    public JTextField getFuncion() {
+        return Funcion;
+    }
+
+    public JTextField getXi1() {
+        return Xi1;
+    }
+
+    public JTextField getXo() {
+        return Xo;
+    }
+
+    public JTextField getXi() {
+        return Xi;
+    }
+
+    public void setTabla1(JTable Tabla1) {
+        this.Tabla1 = Tabla1;
+    }
+
+    public javax.swing.JTable getTabla1() {
+        return Tabla1;
     }
 
     /**
@@ -32,13 +63,13 @@ public class Secante extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Funcion = new javax.swing.JTextField();
-        Tolerancia = new javax.swing.JTextField();
-        Intervalos = new javax.swing.JTextField();
+        Xi1 = new javax.swing.JTextField();
+        Xo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         Calcular = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        Intervalos1 = new javax.swing.JTextField();
+        Xi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 500));
@@ -72,6 +103,11 @@ public class Secante extends javax.swing.JFrame {
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Funcion.setText("F(x)");
+        Funcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FuncionActionPerformed(evt);
+            }
+        });
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +159,7 @@ public class Secante extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel5)
                                 .addGap(54, 54, 54)
-                                .addComponent(Intervalos1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                                .addComponent(Xi, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -135,8 +171,8 @@ public class Secante extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(Funcion, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                            .addComponent(Tolerancia, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                            .addComponent(Intervalos)))
+                                            .addComponent(Xi1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                            .addComponent(Xo)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(21, 21, 21)
                                         .addComponent(Calcular)))
@@ -159,14 +195,14 @@ public class Secante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Xi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Intervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Xo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Intervalos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Xi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(58, 58, 58)
                         .addComponent(Calcular))
@@ -192,8 +228,13 @@ public class Secante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
-        // TODO add your handling code here:
+        MetodoSecanteControlador vamos = new MetodoSecanteControlador(this);
+        vamos.calcularSecante();
     }//GEN-LAST:event_CalcularActionPerformed
+
+    private void FuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuncionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FuncionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,10 +274,10 @@ public class Secante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Calcular;
     private javax.swing.JTextField Funcion;
-    private javax.swing.JTextField Intervalos;
-    private javax.swing.JTextField Intervalos1;
     private javax.swing.JTable Tabla1;
-    private javax.swing.JTextField Tolerancia;
+    private javax.swing.JTextField Xi;
+    private javax.swing.JTextField Xi1;
+    private javax.swing.JTextField Xo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
