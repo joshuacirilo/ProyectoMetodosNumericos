@@ -4,13 +4,13 @@
  */
 package modelo;
 
+//import java.beans.Expression;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.text.DecimalFormat;
-
 public class MetodoBiseccionModelo {
 
     private String funcionStr;
@@ -113,7 +113,6 @@ public class MetodoBiseccionModelo {
                 fa = fxr;
             }
         }
-
         return resultados;
     }
 }
