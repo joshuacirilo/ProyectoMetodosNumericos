@@ -21,10 +21,10 @@ public class ReglaFalsaControlador {
 
     public void calcularReglaFalsa() {
         // 1. Obtener datos de la vista
-        String funcionStr = vista.getFuncion();
-        String toleranciaStr = vista.getTolerancia();
-        String intervaloAStr = vista.getIntervaloA();
-        String intervaloBStr = vista.getIntervaloB();
+        String funcionStr = vista.getFuncion().getText();
+        String toleranciaStr = vista.getTolerancia().getText();
+        String intervaloAStr = vista.getIntervalo1().getText();
+        String intervaloBStr = vista.getIntervalo2().getText();
 
         // 2. Validar datos
         if (funcionStr.isEmpty() || toleranciaStr.isEmpty() || intervaloAStr.isEmpty() || intervaloBStr.isEmpty()) {

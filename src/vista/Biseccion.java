@@ -50,6 +50,8 @@ public class Biseccion extends javax.swing.JFrame {
     public JTable getTabla1() {
         return Tabla1;
     }
+    
+    
 
     // Este setTabla1 no es estrictamente necesario si solo modificas el modelo de la tabla,
     // pero si lo necesitas, déjalo.
