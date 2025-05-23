@@ -75,7 +75,8 @@ public class ReglaFalsa extends javax.swing.JFrame {
         Intervalo2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-        Calcular = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
+        Calcular1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,13 +166,21 @@ public class ReglaFalsa extends javax.swing.JFrame {
 
         JPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 870, 480));
 
-        Calcular.setText("Calcular");
-        Calcular.addActionListener(new java.awt.event.ActionListener() {
+        atras.setText("<<atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CalcularActionPerformed(evt);
+                atrasActionPerformed(evt);
             }
         });
-        JPanel.add(Calcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        JPanel.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
+
+        Calcular1.setText("Calcular");
+        Calcular1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Calcular1ActionPerformed(evt);
+            }
+        });
+        JPanel.add(Calcular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         getContentPane().add(JPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 1330, 710));
 
@@ -195,12 +204,18 @@ public class ReglaFalsa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Intervalo2ActionPerformed
 
-    private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         // TODO add your handling code here:
-        ReglaFalsaControlador RG = new ReglaFalsaControlador(this);
+      Menu men = new Menu();
+      men.setVisible(true);
+      this.dispose();
+    }//GEN-LAST:event_atrasActionPerformed
+
+    private void Calcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular1ActionPerformed
+        // TODO add your handling code here:
+          ReglaFalsaControlador RG = new ReglaFalsaControlador(this);
         RG.calcularReglaFalsa();
-        
-    }//GEN-LAST:event_CalcularActionPerformed
+    }//GEN-LAST:event_Calcular1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,13 +255,14 @@ public class ReglaFalsa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Calcular;
+    private javax.swing.JButton Calcular1;
     private javax.swing.JTextField Funcion;
     private javax.swing.JTextField Intervalo1;
     private javax.swing.JTextField Intervalo2;
     private javax.swing.JPanel JPanel;
     private javax.swing.JTable Tabla1;
     private javax.swing.JTextField Tolerancia;
+    private javax.swing.JButton atras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

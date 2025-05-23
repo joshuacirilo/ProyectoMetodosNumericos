@@ -29,8 +29,8 @@ public class MetodonNewton extends javax.swing.JFrame {
         return Funcion;
     }
 
-    public JTextField getXo() { // Este es tu getIntervaloA
-        return Xo;
+    public JTextField getXi() { // Este es tu getIntervaloA
+        return XI;
     }
 
     public JTextField getDerivado() { // Este es tu getIntervaloB
@@ -59,15 +59,15 @@ public class MetodonNewton extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Funcion = new javax.swing.JTextField();
-        Xo = new javax.swing.JTextField();
         Derivado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         Calcular = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        XI = new javax.swing.JTextField();
+        Calcular1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,20 +85,6 @@ public class MetodonNewton extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Xo:");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jLabel4.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("**Si el método no tiene intervalos omita este campo**");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
         jLabel5.setBackground(new java.awt.Color(0, 153, 153));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,19 +94,25 @@ public class MetodonNewton extends javax.swing.JFrame {
 
         Funcion.setText("F(x)");
 
+        Derivado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DerivadoActionPerformed(evt);
+            }
+        });
+
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Iteración", "i", "xi", "f(xi)", "f ' (xi)", "xr", "Tolerancia"
+                "Iteración", "Xi", "f(xi)", "f ' (xi)", "xr", "Tolerancia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -136,6 +128,26 @@ public class MetodonNewton extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("XI:");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        XI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XIActionPerformed(evt);
+            }
+        });
+
+        Calcular1.setText("<<Atrás");
+        Calcular1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Calcular1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -146,24 +158,24 @@ public class MetodonNewton extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Calcular)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Derivado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(24, 24, 24)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Funcion, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(Xo, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(Derivado)))
-                            .addComponent(jLabel4)
-                            .addComponent(Calcular))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(XI, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Funcion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(70, 70, 70)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(Calcular1)))
                 .addContainerGap(455, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -177,20 +189,20 @@ public class MetodonNewton extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(Funcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Xo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(Derivado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(XI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Calcular))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(Calcular1)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,6 +227,21 @@ public class MetodonNewton extends javax.swing.JFrame {
         vamos.calcularNewton();
 
     }//GEN-LAST:event_CalcularActionPerformed
+
+    private void DerivadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DerivadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DerivadoActionPerformed
+
+    private void XIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_XIActionPerformed
+
+    private void Calcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular1ActionPerformed
+        // TODO add your handling code here:
+        Menu mn = new Menu();
+        mn.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Calcular1ActionPerformed
 
     
    
@@ -255,15 +282,15 @@ public class MetodonNewton extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Calcular;
+    private javax.swing.JButton Calcular1;
     private javax.swing.JTextField Derivado;
     private javax.swing.JTextField Funcion;
     private javax.swing.JTable Tabla1;
-    private javax.swing.JTextField Xo;
+    private javax.swing.JTextField XI;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

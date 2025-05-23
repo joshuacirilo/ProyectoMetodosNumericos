@@ -24,7 +24,7 @@ public class MetodoNewtonControlador {
         // 1. Obtener datos de la vista
         String funcionStr = vista.getFuncion().getText();
         String derivadaStr = vista.getDerivado().getText();
-        String xoStr = vista.getXo().getText();
+        String xoStr = vista.getXi().getText();
 
         // 2. Validar entrada (básico)
         if (funcionStr.isEmpty() || funcionStr.equals("F(x)")) {

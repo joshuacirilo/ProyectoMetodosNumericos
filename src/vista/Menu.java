@@ -34,7 +34,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         interpolacion = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel6 = new javax.swing.JLabel();
         jToggleButton2 = new javax.swing.JToggleButton();
@@ -48,6 +47,7 @@ public class Menu extends javax.swing.JFrame {
         jToggleButton9 = new javax.swing.JToggleButton();
         jToggleButton12 = new javax.swing.JToggleButton();
         jToggleButton13 = new javax.swing.JToggleButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,9 +95,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("-Métodos-");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 13, -1, 51));
-
-        jButton1.setText("<<Atrás");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
 
         jToggleButton1.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton1.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -255,6 +252,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(jToggleButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, 180, -1));
 
+        jButton2.setText("<<Atrás");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,6 +326,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
         // TODO add your handling code here:
+        MetodonNewton mnw = new MetodonNewton();
+        mnw.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
@@ -334,6 +342,13 @@ public class Menu extends javax.swing.JFrame {
     private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton13ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Inicio mn = new Inicio();
+        mn.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,7 +389,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JToggleButton Lagrange;
     private javax.swing.JToggleButton Newton2;
     private javax.swing.JLabel interpolacion;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
