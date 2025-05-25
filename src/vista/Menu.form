@@ -359,7 +359,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="- M&#xe9;todo de lagrange"/>
+            <Property name="text" type="java.lang.String" value="- M&#xe9;todo Raices M&#xfa;ltiples"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -374,7 +374,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="420" width="217" height="-1"/>
+              <AbsoluteConstraints x="260" y="260" width="217" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -404,7 +404,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="860" y="260" width="180" height="-1"/>
+              <AbsoluteConstraints x="860" y="180" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -476,7 +476,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="- M&#xe9;todo Raices M&#xfa;ltiples"/>
+            <Property name="text" type="java.lang.String" value="- M&#xe9;todo Lagrange"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -491,7 +491,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="260" y="260" width="217" height="-1"/>
+              <AbsoluteConstraints x="210" y="420" width="217" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -521,7 +521,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="860" y="180" width="180" height="-1"/>
+              <AbsoluteConstraints x="860" y="220" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -551,7 +551,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="860" y="220" width="180" height="-1"/>
+              <AbsoluteConstraints x="860" y="260" width="180" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

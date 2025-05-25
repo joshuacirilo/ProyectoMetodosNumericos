@@ -19,7 +19,7 @@ public class MetodoReglaFalsaModelo {
         this.funcion = funcion;
     }
 
-    public List<Object[]> reglaFalsa(double a, double b, double toleranciaCriterio) { // Agregado toleranciaCriterio
+    public List<Object[]> reglaFalsa(double a, double b) { // Agregado toleranciaCriterio
         List<Object[]> resultados = new ArrayList<>();
 
         double fa = evaluarFuncion(a);
@@ -43,7 +43,7 @@ public class MetodoReglaFalsaModelo {
         int iteracion = 1;
 
         // Bucle do-while para asegurar al menos una iteración y la condición de parada
-        while (Math.abs(errorAproximacion) > toleranciaCriterio && iteracion <= 100) { // Usamos toleranciaCriterio del GUI
+        while (Math.abs(errorAproximacion) > 1 && iteracion <= 100) { // Usamos toleranciaCriterio del GUI
             xr = ((a * fb) - (b * fa)) / (fb - fa);
             fxr = evaluarFuncion(xr);
 
@@ -78,9 +78,9 @@ public class MetodoReglaFalsaModelo {
             iteracion++;
 
             // Condición adicional para detener si la función evaluada en xr es muy cercana a cero
-            if (Math.abs(fxr) < toleranciaCriterio) {
-                break;
-            }
+//            if (Math.abs(fxr) < toleranciaCriterio) {
+//                break;
+//            }
         }
         return resultados;
     }

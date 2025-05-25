@@ -30,7 +30,7 @@ public class ReglaFalsa extends javax.swing.JFrame {
 
         // Establecemos el tamaño preferido del panel
         panel.setPreferredSize(new Dimension(1200, 600)); 
-        Tolerancia.setText("0.0000");
+//        Tolerancia.setText("0.0000");
         
     }
     
@@ -38,9 +38,9 @@ public class ReglaFalsa extends javax.swing.JFrame {
         return Funcion;
     }
 
-    public JTextField getTolerancia() { // Asegúrate de que este método exista si tienes un JTextField para la tolerancia
-        return Tolerancia;
-    }
+//    public JTextField getTolerancia() { // Asegúrate de que este método exista si tienes un JTextField para la tolerancia
+//        return Tolerancia;
+//    }
 
     public JTextField getIntervalo1() { // Este es tu getIntervaloA
         return Intervalo1;
@@ -67,10 +67,8 @@ public class ReglaFalsa extends javax.swing.JFrame {
         JPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Funcion = new javax.swing.JTextField();
-        Tolerancia = new javax.swing.JTextField();
         Intervalo1 = new javax.swing.JTextField();
         Intervalo2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,21 +95,13 @@ public class ReglaFalsa extends javax.swing.JFrame {
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tolerancia: ");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        JPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
-
         jLabel5.setBackground(new java.awt.Color(0, 153, 153));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Intervalos: ");
         jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        JPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        JPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         Funcion.setText("F(x)");
         Funcion.addActionListener(new java.awt.event.ActionListener() {
@@ -121,27 +111,19 @@ public class ReglaFalsa extends javax.swing.JFrame {
         });
         JPanel.add(Funcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 160, -1));
 
-        Tolerancia.setText("0.0000");
-        Tolerancia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ToleranciaActionPerformed(evt);
-            }
-        });
-        JPanel.add(Tolerancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 160, -1));
-
         Intervalo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Intervalo1ActionPerformed(evt);
             }
         });
-        JPanel.add(Intervalo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 60, -1));
+        JPanel.add(Intervalo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 60, -1));
 
         Intervalo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Intervalo2ActionPerformed(evt);
             }
         });
-        JPanel.add(Intervalo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 60, -1));
+        JPanel.add(Intervalo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 60, -1));
 
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,7 +162,7 @@ public class ReglaFalsa extends javax.swing.JFrame {
                 Calcular1ActionPerformed(evt);
             }
         });
-        JPanel.add(Calcular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        JPanel.add(Calcular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         getContentPane().add(JPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, 1330, 710));
 
@@ -191,10 +173,6 @@ public class ReglaFalsa extends javax.swing.JFrame {
     private void FuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuncionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FuncionActionPerformed
-
-    private void ToleranciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToleranciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ToleranciaActionPerformed
 
     private void Intervalo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Intervalo1ActionPerformed
         // TODO add your handling code here:
@@ -261,11 +239,9 @@ public class ReglaFalsa extends javax.swing.JFrame {
     private javax.swing.JTextField Intervalo2;
     private javax.swing.JPanel JPanel;
     private javax.swing.JTable Tabla1;
-    private javax.swing.JTextField Tolerancia;
     private javax.swing.JButton atras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

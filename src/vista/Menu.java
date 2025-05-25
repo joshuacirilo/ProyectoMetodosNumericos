@@ -169,7 +169,7 @@ public class Menu extends javax.swing.JFrame {
         Lagrange.setBackground(new java.awt.Color(0, 51, 102));
         Lagrange.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         Lagrange.setForeground(new java.awt.Color(255, 255, 255));
-        Lagrange.setText("- Método de lagrange");
+        Lagrange.setText("- Método Raices Múltiples");
         Lagrange.setToolTipText("");
         Lagrange.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         Lagrange.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +177,7 @@ public class Menu extends javax.swing.JFrame {
                 LagrangeActionPerformed(evt);
             }
         });
-        jPanel1.add(Lagrange, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 217, -1));
+        jPanel1.add(Lagrange, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 217, -1));
 
         jToggleButton11.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton11.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -190,7 +190,7 @@ public class Menu extends javax.swing.JFrame {
                 jToggleButton11ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 260, 180, -1));
+        jPanel1.add(jToggleButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 180, -1));
 
         jLabel8.setBackground(new java.awt.Color(0, 153, 153));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
@@ -216,7 +216,7 @@ public class Menu extends javax.swing.JFrame {
         jToggleButton9.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton9.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jToggleButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton9.setText("- Método Raices Múltiples");
+        jToggleButton9.setText("- Método Lagrange");
         jToggleButton9.setToolTipText("");
         jToggleButton9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +224,7 @@ public class Menu extends javax.swing.JFrame {
                 jToggleButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 217, -1));
+        jPanel1.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 217, -1));
 
         jToggleButton12.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton12.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -237,7 +237,7 @@ public class Menu extends javax.swing.JFrame {
                 jToggleButton12ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 180, -1));
+        jPanel1.add(jToggleButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, 180, -1));
 
         jToggleButton13.setBackground(new java.awt.Color(0, 51, 102));
         jToggleButton13.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -250,7 +250,7 @@ public class Menu extends javax.swing.JFrame {
                 jToggleButton13ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 220, 180, -1));
+        jPanel1.add(jToggleButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 260, 180, -1));
 
         jButton2.setText("<<Atrás");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -333,10 +333,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
         // TODO add your handling code here:
+        LinealLagrange ln = new LinealLagrange();
+        ln.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jToggleButton9ActionPerformed
 
     private void jToggleButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton12ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jToggleButton12ActionPerformed
 
     private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed

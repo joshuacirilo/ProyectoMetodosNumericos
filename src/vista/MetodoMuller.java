@@ -122,7 +122,7 @@ public class MetodoMuller extends javax.swing.JFrame {
             }
         });
 
-        Calcular2.setText("Menú");
+        Calcular2.setText("<<Atrás");
         Calcular2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Calcular2ActionPerformed(evt);
@@ -228,6 +228,9 @@ public class MetodoMuller extends javax.swing.JFrame {
 
     private void Calcular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular2ActionPerformed
         // TODO add your handling code here:
+        Menu mn = new Menu();
+        mn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_Calcular2ActionPerformed
 
     /**

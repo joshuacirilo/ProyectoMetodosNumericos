@@ -22,12 +22,12 @@ public class ReglaFalsaControlador {
     public void calcularReglaFalsa() {
         // 1. Obtener datos de la vista
         String funcionStr = vista.getFuncion().getText();
-        String toleranciaStr = vista.getTolerancia().getText();
+//        String toleranciaStr = vista.getTolerancia().getText();
         String intervaloAStr = vista.getIntervalo1().getText();
         String intervaloBStr = vista.getIntervalo2().getText();
 
         // 2. Validar datos
-        if (funcionStr.isEmpty() || toleranciaStr.isEmpty() || intervaloAStr.isEmpty() || intervaloBStr.isEmpty()) {
+        if (funcionStr.isEmpty() || intervaloAStr.isEmpty() || intervaloBStr.isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -35,16 +35,16 @@ public class ReglaFalsaControlador {
         try {
             double a = Double.parseDouble(intervaloAStr);
             double b = Double.parseDouble(intervaloBStr);
-            double tolerancia = Double.parseDouble(toleranciaStr);
-
-            if (tolerancia <= 0) {
-                 JOptionPane.showMessageDialog(vista, "La tolerancia debe ser un valor positivo.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
-                 return;
-            }
+//            double tolerancia = Double.parseDouble(toleranciaStr);
+//
+//            if (tolerancia <= 0) {
+//                 JOptionPane.showMessageDialog(vista, "La tolerancia debe ser un valor positivo.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+//                 return;
+//            }
 
             // 3. Instanciar el modelo y realizar el cálculo
             modelo = new MetodoReglaFalsaModelo(funcionStr);
-            List<Object[]> resultados = modelo.reglaFalsa(a, b, tolerancia); // Pasa la tolerancia
+            List<Object[]> resultados = modelo.reglaFalsa(a, b); // Pasa la tolerancia
 
             // 4. Mostrar resultados o errores
             if (resultados != null && !resultados.isEmpty()) {
