@@ -4,19 +4,85 @@
  */
 package vista;
 
+import controlador.MetodoSustitucionControlador;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import modelo.MetodoSusticucionModelo;
+import practica.mvc.PracticaMVC;
+
 /**
  *
  * @author moralesjs_
  */
 public class Sustitucion extends javax.swing.JFrame {
+    public JTextField txtA1, txtB1, txtC1;
+    public JTextField txtA2, txtB2, txtC2;
+    public JButton btnCalcular;
+    public JTextArea resultadoArea;
 
     /**
      * Creates new form Sustitucion
      */
     public Sustitucion() {
-        initComponents();
-    }
+setTitle("Método de Sustitución - 2 Incógnitas");
+    setSize(400, 300);
+    setLocationRelativeTo(null);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(new GridLayout(5, 1));
 
+    // Panel ecuación 1
+    JPanel panelEcuacion1 = new JPanel(new FlowLayout());
+    txtA1 = new JTextField(3);
+    txtB1 = new JTextField(3);
+    txtC1 = new JTextField(3);
+    panelEcuacion1.add(new JLabel("Ecuación 1:"));
+    panelEcuacion1.add(txtA1);
+    panelEcuacion1.add(new JLabel("X +"));
+    panelEcuacion1.add(txtB1);
+    panelEcuacion1.add(new JLabel("Y ="));
+    panelEcuacion1.add(txtC1);
+
+    // Panel ecuación 2
+    JPanel panelEcuacion2 = new JPanel(new FlowLayout());
+    txtA2 = new JTextField(3);
+    txtB2 = new JTextField(3);
+    txtC2 = new JTextField(3);
+    panelEcuacion2.add(new JLabel("Ecuación 2:"));
+    panelEcuacion2.add(txtA2);
+    panelEcuacion2.add(new JLabel("X +"));
+    panelEcuacion2.add(txtB2);
+    panelEcuacion2.add(new JLabel("Y ="));
+    panelEcuacion2.add(txtC2);
+
+    // Botón calcular
+    btnCalcular = new JButton("Calcular");
+
+    // Área de resultados
+    resultadoArea = new JTextArea(3, 30);
+    resultadoArea.setEditable(false);
+    JScrollPane scrollPane = new JScrollPane(resultadoArea);
+
+    // Agregar al JFrame
+    add(panelEcuacion1);
+    add(panelEcuacion2);
+    add(btnCalcular);
+    add(scrollPane);
+
+        
+        
+    }
+        
+       
+        
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,55 +92,23 @@ public class Sustitucion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(0, 51, 102));
-
-        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("-Sustitución-");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel1)
-                .addContainerGap(463, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addContainerGap(444, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+       
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
+        
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -105,9 +139,43 @@ public class Sustitucion extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public javax.swing.JTextField getTxtA1() {
+    return txtA1;
+}
+
+public javax.swing.JTextField getTxtB1() {
+    return txtB1;
+}
+
+public javax.swing.JTextField getTxtC1() {
+    return txtC1;
+}
+
+public javax.swing.JTextField getTxtA2() {
+    return txtA2;
+}
+
+public javax.swing.JTextField getTxtB2() {
+    return txtB2;
+}
+
+public javax.swing.JTextField getTxtC2() {
+    return txtC2;
+}
+
+public javax.swing.JButton getBtnCalcular() {
+    return btnCalcular;
+}
+
+public javax.swing.JTextArea getResultadoArea() {
+    return resultadoArea;
+}
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

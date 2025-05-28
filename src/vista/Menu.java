@@ -319,9 +319,11 @@ public class Menu extends javax.swing.JFrame {
 
     private void jToggleButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton11ActionPerformed
         // TODO add your handling code here:
-        LinealNewton ln = new LinealNewton();
-        ln.setVisible(true);
+        MenuSistemasEcuacionesLineales ms = new MenuSistemasEcuacionesLineales();
+        ms.setVisible(true);
         this.dispose();
+        
+        
     }//GEN-LAST:event_jToggleButton11ActionPerformed
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
