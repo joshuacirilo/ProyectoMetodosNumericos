@@ -22,7 +22,8 @@ public class PracticaMVC {
      */
     public static void main(String[] args) {
 //        Inicio va  = new Inicio();
-     
+     Sustitucion st = new Sustitucion();
+     st.setVisible(true);
     }
     }
 

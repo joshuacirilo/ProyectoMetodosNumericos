@@ -342,11 +342,17 @@ public class Menu extends javax.swing.JFrame {
 
     private void jToggleButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton12ActionPerformed
         // TODO add your handling code here:
+        MenuSistemasEcuacionesLineales ms = new MenuSistemasEcuacionesLineales();
+        ms.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jToggleButton12ActionPerformed
 
     private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed
         // TODO add your handling code here:
+        MenuSistemasEcuacionesLineales ms = new MenuSistemasEcuacionesLineales();
+        ms.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jToggleButton13ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
