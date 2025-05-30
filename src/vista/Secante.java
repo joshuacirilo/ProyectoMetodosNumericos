@@ -19,7 +19,7 @@ public class Secante extends javax.swing.JFrame {
      */
     public Secante() {
         initComponents();
-        this.setTitle("Método Bisección");
+        this.setTitle("Método secante");
         this.setLocationRelativeTo(null);
         this.setEnabled(true);
     }

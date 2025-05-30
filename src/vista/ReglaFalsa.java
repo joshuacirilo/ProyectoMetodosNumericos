@@ -38,9 +38,6 @@ public class ReglaFalsa extends javax.swing.JFrame {
         return Funcion;
     }
 
-//    public JTextField getTolerancia() { // Asegúrate de que este método exista si tienes un JTextField para la tolerancia
-//        return Tolerancia;
-//    }
 
     public JTextField getIntervalo1() { // Este es tu getIntervaloA
         return Intervalo1;
