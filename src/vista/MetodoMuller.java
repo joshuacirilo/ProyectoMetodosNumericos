@@ -4,6 +4,12 @@
  */
 package vista;
 
+import controlador.MetodoMullerControlador;
+import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author moralesjs_
@@ -15,6 +21,32 @@ public class MetodoMuller extends javax.swing.JFrame {
      */
     public MetodoMuller() {
         initComponents();
+        setSize(1300, 650);
+        setLocationRelativeTo(null);
+        JPanel panel = new JPanel();
+
+        // Establecemos el tamaño preferido del panel
+        panel.setPreferredSize(new Dimension(1200, 600));
+    }
+
+    public JTextField getFuncion() {
+        return Funcion;
+    }
+
+    public JTextField getx0() { // Este es tu getIntervaloA
+        return x0;
+    }
+
+    public JTextField getx1() { // Este es tu getIntervaloB
+        return x1;
+    }
+
+    public JTextField getx2() { // Este es tu getIntervaloB
+        return x2;
+    }
+
+    public JTable getTabla1() {
+        return Tabla1;
     }
 
     /**
@@ -32,14 +64,13 @@ public class MetodoMuller extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Funcion = new javax.swing.JTextField();
-        Tolerancia = new javax.swing.JTextField();
-        Intervalos = new javax.swing.JTextField();
+        x0 = new javax.swing.JTextField();
+        x1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
         Calcular = new javax.swing.JButton();
-        Intervalos1 = new javax.swing.JTextField();
+        x2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Calcular1 = new javax.swing.JButton();
         Calcular2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,9 +133,9 @@ public class MetodoMuller extends javax.swing.JFrame {
             }
         });
 
-        Intervalos1.addActionListener(new java.awt.event.ActionListener() {
+        x2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Intervalos1ActionPerformed(evt);
+                x2ActionPerformed(evt);
             }
         });
 
@@ -114,13 +145,6 @@ public class MetodoMuller extends javax.swing.JFrame {
         jLabel6.setText("X2:");
         jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        Calcular1.setText("Agregar");
-        Calcular1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Calcular1ActionPerformed(evt);
-            }
-        });
 
         Calcular2.setText("<<Atrás");
         Calcular2.addActionListener(new java.awt.event.ActionListener() {
@@ -152,10 +176,9 @@ public class MetodoMuller extends javax.swing.JFrame {
                                             .addComponent(Calcular)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(Funcion, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                                .addComponent(Tolerancia, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                                .addComponent(Intervalos1)
-                                                .addComponent(Intervalos))
-                                            .addComponent(Calcular1))))
+                                                .addComponent(x0, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                                .addComponent(x2)
+                                                .addComponent(x1)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -177,19 +200,17 @@ public class MetodoMuller extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(x0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(Intervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(x1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(Intervalos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Calcular1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(x2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
                         .addComponent(Calcular)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(Calcular2)
@@ -214,17 +235,16 @@ public class MetodoMuller extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
-        // TODO add your handling code here:
+
+        MetodoMullerControlador controlador = new MetodoMullerControlador(this);
+        controlador.calcularMetodoMuller();
+
 
     }//GEN-LAST:event_CalcularActionPerformed
 
-    private void Intervalos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Intervalos1ActionPerformed
+    private void x2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Intervalos1ActionPerformed
-
-    private void Calcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Calcular1ActionPerformed
+    }//GEN-LAST:event_x2ActionPerformed
 
     private void Calcular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular2ActionPerformed
         // TODO add your handling code here:
@@ -270,13 +290,9 @@ public class MetodoMuller extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Calcular;
-    private javax.swing.JButton Calcular1;
     private javax.swing.JButton Calcular2;
     private javax.swing.JTextField Funcion;
-    private javax.swing.JTextField Intervalos;
-    private javax.swing.JTextField Intervalos1;
     private javax.swing.JTable Tabla1;
-    private javax.swing.JTextField Tolerancia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -284,5 +300,8 @@ public class MetodoMuller extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField x0;
+    private javax.swing.JTextField x1;
+    private javax.swing.JTextField x2;
     // End of variables declaration//GEN-END:variables
 }

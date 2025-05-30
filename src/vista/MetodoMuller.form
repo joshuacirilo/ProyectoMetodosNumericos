@@ -70,11 +70,10 @@
                                               <Component id="Calcular" min="-2" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="Funcion" alignment="0" pref="176" max="32767" attributes="0"/>
-                                                  <Component id="Tolerancia" alignment="0" pref="176" max="32767" attributes="0"/>
-                                                  <Component id="Intervalos1" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="Intervalos" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="x0" alignment="0" pref="176" max="32767" attributes="0"/>
+                                                  <Component id="x2" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="x1" alignment="0" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="Calcular1" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -107,22 +106,20 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Tolerancia" min="-2" max="-2" attributes="0"/>
+                              <Component id="x0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Intervalos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="x1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Intervalos1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="x2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Calcular1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="Calcular" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -163,7 +160,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -185,7 +182,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -207,7 +204,7 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
         </Component>
@@ -216,9 +213,9 @@
             <Property name="text" type="java.lang.String" value="F(x)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Tolerancia">
+        <Component class="javax.swing.JTextField" name="x0">
         </Component>
-        <Component class="javax.swing.JTextField" name="Intervalos">
+        <Component class="javax.swing.JTextField" name="x1">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -348,9 +345,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CalcularActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="Intervalos1">
+        <Component class="javax.swing.JTextField" name="x2">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Intervalos1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="x2ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -371,17 +368,9 @@
               </Border>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="Calcular1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Agregar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Calcular1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Calcular2">
           <Properties>
