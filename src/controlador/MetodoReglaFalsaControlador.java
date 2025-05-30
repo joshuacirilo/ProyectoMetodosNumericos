@@ -4,45 +4,56 @@
  */
 package controlador;
 
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import modelo.MetodoReglaFalsaModelo;
 import vista.ReglaFalsa;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class MetodoReglaFalsaControlador {
-    
-    private final ReglaFalsa vista;
+
+    private ReglaFalsa vista;
 
     public MetodoReglaFalsaControlador(ReglaFalsa vista) {
         this.vista = vista;
     }
 
     public void calcularReglaFalsa() {
+        String funcionTexto = vista.getFuncion().getText();
+        String aTexto = vista.getIntervalo1().getText();
+        String bTexto = vista.getIntervalo2().getText();
+
+        // Validación de campos vacíos
+        if (funcionTexto.isEmpty() || aTexto.isEmpty() || bTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "Por favor, complete todos los campos.");
+            return;
+        }
+        String funcion;
+        double a, b;
         try {
-            String funcion = vista.getFuncion().getText().trim();
-            double a = Double.parseDouble(vista.getIntervalo1().getText().trim());
-            double b = Double.parseDouble(vista.getIntervalo2().getText().trim());
+            funcion = funcionTexto;
+            a = Double.parseDouble(aTexto);
+            b = Double.parseDouble(bTexto);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(vista, "Los intervalos deben ser números válidos.");
+            return;
+        }
 
-            MetodoReglaFalsaModelo modelo = new MetodoReglaFalsaModelo(funcion);
-            List<Object[]> resultados = modelo.reglaFalsa(a, b);
+        MetodoReglaFalsaModelo modelo = new MetodoReglaFalsaModelo();
+        List<Object[]> resultados = modelo.calcularReglaFalsa(funcion,a, b);
 
-            if (resultados == null) {
-                JOptionPane.showMessageDialog(vista, "Error: No se pudo evaluar la función o los intervalos no cumplen los requisitos.");
-                return;
-            }
+        if (resultados == null || resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "No se pudo calcular la raíz. Verifique la función o los intervalos.");
+            return;
+        }
 
-            DefaultTableModel tableModel = (DefaultTableModel) vista.getTabla1().getModel();
-            tableModel.setRowCount(0); // Limpiar tabla antes de agregar resultados
+        // Mostrar resultados en la tabla
+        DefaultTableModel tabla = (DefaultTableModel) vista.getTabla1().getModel();
+        tabla.setRowCount(0); // Limpiar tabla
 
-            for (Object[] fila : resultados) {
-                tableModel.addRow(fila);
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(vista, "Error: Los intervalos deben ser números válidos.");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(vista, "Error inesperado: " + e.getMessage());
+        for (Object[] fila : resultados) {
+            tabla.addRow(fila);
         }
     }
 }

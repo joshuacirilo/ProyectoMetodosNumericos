@@ -4,114 +4,93 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MetodoReglaFalsaModelo {
-    private String funcion;
 
-    public MetodoReglaFalsaModelo(String funcion) {
-        this.funcion = preprocesarFuncion(funcion);
-    }
-
-    public List<Object[]> reglaFalsa(double a, double b) {
+    public List<Object[]> calcularReglaFalsa(String funcion, double a, double b) {
         List<Object[]> resultados = new ArrayList<>();
+        final double TOLERANCIA = 0.0001;
+        int iteracion = 0;
+        double xrAnterior = 0;
 
-        double fa = evaluarFuncion(a);
-        double fb = evaluarFuncion(b);
+        // Formatear la función para que JavaScript la entienda
+        funcion = prepararFuncion(funcion);
 
-        if (Double.isNaN(fa) || Double.isNaN(fb)) {
-            return null;
-        }
+        try {
+            double fa = evaluarFuncion(funcion, a);
+            double fb = evaluarFuncion(funcion, b);
 
-        if (fa * fb >= 0) {
-            System.out.println("Error: f(a) y f(b) tienen el mismo signo o uno es cero. No se puede garantizar la aplicación de la Regla Falsa.");
-            return null;
-        }
-
-        double xr = 0;
-        double xrAnterior = b;
-        double fxr = 0;
-        double errorAproximacion = Double.MAX_VALUE;
-        int iteracion = 1;
-
-        // ✅ Cambiada la tolerancia a 0.001
-        while (Math.abs(errorAproximacion) > 0.001 && iteracion <= 100) {
-            xr = ((a * fb) - (b * fa)) / (fb - fa);
-            fxr = evaluarFuncion(xr);
-
-            if (Double.isNaN(fxr)) {
-                return null;
+            if (fa * fb > 0) {
+                System.out.println("La función no cambia de signo en el intervalo dado.");
+                return resultados;
             }
 
-            errorAproximacion = Math.abs(xr - xrAnterior);
+            double xr = a; // Valor inicial
+            double error;
 
-            Object[] fila = new Object[] {
-                iteracion,
-                String.format("%.6f", a),
-                String.format("%.6f", b),
-                String.format("%.6f", fa),
-                String.format("%.6f", fb),
-                String.format("%.6f", xr),
-                String.format("%.6f", fxr),
-                String.format("%.6f", errorAproximacion)
-            };
-            resultados.add(fila);
+            do {
+                xr = b - (fb * (a - b)) / (fa - fb);
+                double fxr = evaluarFuncion(funcion, xr);
+                error = Math.abs(xr - xrAnterior);
+                xrAnterior = xr;
 
-            if (fa * fxr < 0) {
-                b = xr;
-                fb = fxr;
-            } else {
-                a = xr;
-                fa = fxr;
-            }
+                Object[] fila = {
+                    iteracion,
+                    formatear(a),
+                    formatear(b),
+                    formatear(fa),
+                    formatear(fb),
+                    formatear(xr),
+                    formatear(fxr),
+                    iteracion == 0 ? "-" : formatear(error),
+                    "", "", "", "", ""
+                };
+                resultados.add(fila);
 
-            xrAnterior = xr;
-            iteracion++;
+                if (fa * fxr < 0) {
+                    b = xr;
+                    fb = fxr;
+                } else {
+                    a = xr;
+                    fa = fxr;
+                }
+
+                iteracion++;
+                if (iteracion > 1000) break; // Evitar bucles infinitos
+
+            } while (error > TOLERANCIA);
+
+        } catch (ScriptException e) {
+            System.out.println("Error de sintaxis en f(x): " + e.getMessage());
         }
 
         return resultados;
     }
 
-    private double evaluarFuncion(double x) {
-        try {
-            ScriptEngineManager manager = new ScriptEngineManager();
-            ScriptEngine engine = manager.getEngineByName("JavaScript");
+    private double evaluarFuncion(String funcion, double x) throws ScriptException {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
 
-            String expr = funcion.replaceAll("\\bx\\b", "(" + x + ")");
-            Object result = engine.eval(expr);
+        // Reemplazar "x" por su valor
+        String expresion = funcion.replaceAll("x", "(" + x + ")");
+        Object resultado = engine.eval(expresion);
 
-            if (result instanceof Number) {
-                return ((Number) result).doubleValue();
-            } else {
-                System.out.println("Error al evaluar f(x): El resultado no es un número.");
-                return Double.NaN;
-            }
-        } catch (ScriptException e) {
-            System.out.println("Error de sintaxis en la función f(x): " + e.getMessage());
-            return Double.NaN;
-        } catch (Exception e) {
-            System.out.println("Error inesperado al evaluar f(x): " + e.getMessage());
-            return Double.NaN;
-        }
+        return Double.parseDouble(resultado.toString());
     }
 
-    private String preprocesarFuncion(String funcionOriginal) {
-        String f = funcionOriginal;
+    private String prepararFuncion(String funcion) {
+        // Reemplazar x^n con Math.pow(x,n)
+        return funcion.replaceAll("x\\^([0-9]+)", "Math.pow(x,$1)");
+    }
 
-        // Reemplazar potencias como x^2 o (2x)^3 por Math.pow(...)
-        f = f.replaceAll("([a-zA-Z0-9\\.\\)]+)\\s*\\^\\s*([0-9]+)", "Math.pow($1,$2)");
-
-        // Insertar multiplicación entre número y variable: 4x → 4*x
-        f = f.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
-
-        // Insertar multiplicación entre variable y variable: xy → x*y
-        f = f.replaceAll("([a-zA-Z])([a-zA-Z])", "$1*$2");
-
-        return f;
+    private String formatear(double valor) {
+        DecimalFormat df = new DecimalFormat("0.0000");
+        return df.format(valor);
     }
 }
