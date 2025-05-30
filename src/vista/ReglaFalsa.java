@@ -4,7 +4,7 @@
  */
 package vista;
 
-import controlador.ReglaFalsaControlador;
+import controlador.MetodoReglaFalsaControlador;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -188,7 +188,7 @@ public class ReglaFalsa extends javax.swing.JFrame {
 
     private void Calcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Calcular1ActionPerformed
         // TODO add your handling code here:
-          ReglaFalsaControlador RG = new ReglaFalsaControlador(this);
+          MetodoReglaFalsaControlador RG = new MetodoReglaFalsaControlador(this);
         RG.calcularReglaFalsa();
     }//GEN-LAST:event_Calcular1ActionPerformed
 

@@ -2,58 +2,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package modelo;
-
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException; 
+import javax.script.ScriptException;
 
 public class MetodoReglaFalsaModelo {
     private String funcion;
 
     public MetodoReglaFalsaModelo(String funcion) {
-        this.funcion = funcion;
+        this.funcion = preprocesarFuncion(funcion);
     }
 
-    public List<Object[]> reglaFalsa(double a, double b) { // Agregado toleranciaCriterio
+    public List<Object[]> reglaFalsa(double a, double b) {
         List<Object[]> resultados = new ArrayList<>();
 
         double fa = evaluarFuncion(a);
         double fb = evaluarFuncion(b);
 
         if (Double.isNaN(fa) || Double.isNaN(fb)) {
-            // Si la evaluación de la función falla, el error ya se imprimió en evaluarFuncion.
-            // Aquí simplemente retornamos null.
             return null;
         }
 
-        if (fa * fb >= 0) { // Cambiado a >= para incluir el caso donde una raíz es un límite inicial
+        if (fa * fb >= 0) {
             System.out.println("Error: f(a) y f(b) tienen el mismo signo o uno es cero. No se puede garantizar la aplicación de la Regla Falsa.");
             return null;
         }
 
         double xr = 0;
-        double xrAnterior = b; // Inicializar xrAnterior con b para la primera iteración
+        double xrAnterior = b;
         double fxr = 0;
-        double errorAproximacion = Double.MAX_VALUE; // Cambiado a un nombre más descriptivo
+        double errorAproximacion = Double.MAX_VALUE;
         int iteracion = 1;
 
-        // Bucle do-while para asegurar al menos una iteración y la condición de parada
-        while (Math.abs(errorAproximacion) > 1 && iteracion <= 100) { // Usamos toleranciaCriterio del GUI
+        // ✅ Cambiada la tolerancia a 0.001
+        while (Math.abs(errorAproximacion) > 0.001 && iteracion <= 100) {
             xr = ((a * fb) - (b * fa)) / (fb - fa);
             fxr = evaluarFuncion(xr);
 
-            if (Double.isNaN(fxr)) { // Manejar error si fxr no puede ser evaluado
+            if (Double.isNaN(fxr)) {
                 return null;
             }
 
             errorAproximacion = Math.abs(xr - xrAnterior);
 
-            // Guarda la fila como arreglo de Object
             Object[] fila = new Object[] {
                 iteracion,
                 String.format("%.6f", a),
@@ -76,26 +72,19 @@ public class MetodoReglaFalsaModelo {
 
             xrAnterior = xr;
             iteracion++;
-
-            // Condición adicional para detener si la función evaluada en xr es muy cercana a cero
-//            if (Math.abs(fxr) < toleranciaCriterio) {
-//                break;
-//            }
         }
+
         return resultados;
     }
 
-    // Método privado para evaluar la función
     private double evaluarFuncion(double x) {
         try {
             ScriptEngineManager manager = new ScriptEngineManager();
             ScriptEngine engine = manager.getEngineByName("JavaScript");
 
-            // Asegura que solo se reemplace 'x' como variable, no dentro de palabras
             String expr = funcion.replaceAll("\\bx\\b", "(" + x + ")");
             Object result = engine.eval(expr);
 
-            // Manejar resultados que no son números (por ejemplo, si la función es inválida)
             if (result instanceof Number) {
                 return ((Number) result).doubleValue();
             } else {
@@ -104,10 +93,25 @@ public class MetodoReglaFalsaModelo {
             }
         } catch (ScriptException e) {
             System.out.println("Error de sintaxis en la función f(x): " + e.getMessage());
-            return Double.NaN; // Devuelve NaN en caso de error de sintaxis en la función
+            return Double.NaN;
         } catch (Exception e) {
             System.out.println("Error inesperado al evaluar f(x): " + e.getMessage());
-            return Double.NaN; // Devuelve NaN en caso de otro error
+            return Double.NaN;
         }
+    }
+
+    private String preprocesarFuncion(String funcionOriginal) {
+        String f = funcionOriginal;
+
+        // Reemplazar potencias como x^2 o (2x)^3 por Math.pow(...)
+        f = f.replaceAll("([a-zA-Z0-9\\.\\)]+)\\s*\\^\\s*([0-9]+)", "Math.pow($1,$2)");
+
+        // Insertar multiplicación entre número y variable: 4x → 4*x
+        f = f.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
+
+        // Insertar multiplicación entre variable y variable: xy → x*y
+        f = f.replaceAll("([a-zA-Z])([a-zA-Z])", "$1*$2");
+
+        return f;
     }
 }
