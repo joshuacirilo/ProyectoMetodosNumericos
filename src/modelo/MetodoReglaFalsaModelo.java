@@ -15,7 +15,7 @@ public class MetodoReglaFalsaModelo {
 
     public List<Object[]> calcularReglaFalsa(String funcion, double a, double b) {
         List<Object[]> resultados = new ArrayList<>();
-        final double TOLERANCIA = 0.0001;
+        final double TOLERANCIA = 0.001;
         int iteracion = 0;
         double xrAnterior = 0;
 
