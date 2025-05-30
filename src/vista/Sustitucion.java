@@ -247,9 +247,7 @@ public class Sustitucion extends javax.swing.JFrame {
         new MetodoSustitucionControlador(null, this);
         
     }
-        
-       
-        
+ 
         
     /**
      * This method is called from within the constructor to initialize the form.
@@ -270,11 +268,7 @@ public class Sustitucion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-       
-    
-    
-    
+
     
     /**
      * @param args the command line arguments
