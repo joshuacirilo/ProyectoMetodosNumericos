@@ -305,8 +305,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void Newton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Newton2ActionPerformed
         // TODO add your handling code here:
-        MetodonNewton mw = new MetodonNewton();
-        mw.setVisible(true);
+        
+        LinealNewton mnw = new LinealNewton();
+        mnw.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Newton2ActionPerformed
 
@@ -327,10 +328,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton11ActionPerformed
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
-        // TODO add your handling code here:
-        MetodonNewton mnw = new MetodonNewton();
-        mnw.setVisible(true);
+        MetodonNewton mw = new MetodonNewton();
+        mw.setVisible(true);
         this.dispose();
+        
+
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed

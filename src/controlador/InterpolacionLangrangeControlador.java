@@ -34,7 +34,7 @@ public class InterpolacionLangrangeControlador {
             double[] xVals;
             double[] yVals;
 
-            // Verificar si hay datos en la tabla (más de 2 filas llenas)
+          
             int rowCount = model.getRowCount();
             int validRows = 0;
 
@@ -46,7 +46,7 @@ public class InterpolacionLangrangeControlador {
                 }
             }
 
-            // Si hay 2 o más puntos válidos en la tabla, usar esos
+            
             if (validRows >= 2) {
                 xVals = new double[validRows];
                 yVals = new double[validRows];
@@ -63,7 +63,7 @@ public class InterpolacionLangrangeControlador {
                 }
 
             } else {
-                // Si la tabla no tiene datos válidos, usar los campos de texto
+                
                 double x1 = Double.parseDouble(vista.getvalorx1().getText());
                 double y1 = Double.parseDouble(vista.getvalory1().getText());
                 double x2 = Double.parseDouble(vista.getvalorx2().getText());
@@ -72,7 +72,7 @@ public class InterpolacionLangrangeControlador {
                 xVals = new double[]{x1, x2};
                 yVals = new double[]{y1, y2};
 
-                // Llenar la tabla si está vacía (opcional)
+                
                 if (model.getRowCount() == 0) {
                     model.setRowCount(2);
                     model.setValueAt("X", 0, 0);
