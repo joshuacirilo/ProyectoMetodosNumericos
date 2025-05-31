@@ -2,72 +2,72 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
+
 package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que implementa el método de Interpolación de Lagrange.
- * Forma parte de la capa Modelo en un diseño MVC.
+ * Modelo que implementa el método de Interpolación de Lagrange para múltiples puntos.
  */
 public class InterpolacionLagrangeModelo {
 
-    private double[] xValues;
-    private double[] yValues;
+    private final double[] xValues;
+    private final double[] yValues;
 
     /**
-     * Constructor para inicializar el modelo con los puntos de datos conocidos.
-     * @param xValues Un arreglo de coordenadas X de los puntos de datos.
-     * @param yValues Un arreglo de coordenadas Y (valores de la función) de los puntos de datos.
-     * @throws IllegalArgumentException Si los arreglos de x y y son de diferente tamaño, nulos o vacíos.
+     * Inicializa el modelo con los puntos (x, y) conocidos.
+     *
+     * @param xValues Arreglo con valores de X.
+     * @param yValues Arreglo con valores de Y correspondientes a cada X.
+     * @throws IllegalArgumentException Si los arreglos son nulos, vacíos o de distinta longitud.
      */
     public InterpolacionLagrangeModelo(double[] xValues, double[] yValues) {
         if (xValues == null || yValues == null || xValues.length == 0 || yValues.length == 0) {
             throw new IllegalArgumentException("Los arreglos de puntos no pueden ser nulos o vacíos.");
         }
         if (xValues.length != yValues.length) {
-            throw new IllegalArgumentException("Los arreglos de x y y deben tener el mismo tamaño.");
+            throw new IllegalArgumentException("Los arreglos de X y Y deben tener el mismo tamaño.");
         }
+
         this.xValues = xValues;
         this.yValues = yValues;
     }
 
     /**
-     * Evalúa el polinomio de interpolación de Lagrange en un punto 'x' dado.
-     * @param x_interpolar El valor de x en el que se desea interpolar.
-     * @return El valor interpolado y en el punto x_interpolar.
+     * Realiza la interpolación de Lagrange para un valor dado de X.
+     *
+     * @param x Valor en el cual se desea interpolar.
+     * @return Valor interpolado de Y.
      */
-    public double interpolar(double x_interpolar) {
-        int n = xValues.length; // Número de puntos de datos (n)
+    public double interpolar(double x) {
         double resultado = 0.0;
+        int n = xValues.length;
 
-        // Bucle principal para calcular la suma de L_k(x) * y_k
-        for (int k = 0; k < n; k++) {
-            double Lk_x = 1.0; // Inicializamos el término L_k(x) para el punto k
-
-            // Bucle para calcular el producto de los términos (x - x_j) / (x_k - x_j)
+        for (int i = 0; i < n; i++) {
+            double termino = yValues[i];
             for (int j = 0; j < n; j++) {
-                if (k != j) { // Excluimos el término cuando j = k
-                    // Verificar si hay puntos x duplicados, lo que causaría división por cero
-                    if (Math.abs(xValues[k] - xValues[j]) < 1e-9) { // Usamos una tolerancia para comparar doubles
-                        // Esto indica que hay valores de x duplicados en los puntos de datos,
-                        // lo cual hace que el método de Lagrange sea inviable directamente.
-                        // Podrías lanzar una excepción o manejarlo de otra manera.
-                        System.err.println("Error: Puntos X duplicados encontrados. La interpolación de Lagrange requiere puntos X distintos.");
-                        return Double.NaN; // Retorna NaN para indicar un error
+                if (i != j) {
+                    double denominador = xValues[i] - xValues[j];
+                    if (Math.abs(denominador) < 1e-9) {
+                        System.err.println("Error: Hay puntos X duplicados. No se puede calcular la interpolación.");
+                        return Double.NaN;
                     }
-                    Lk_x *= (x_interpolar - xValues[j]) / (xValues[k] - xValues[j]);
+                    termino *= (x - xValues[j]) / denominador;
                 }
             }
-            resultado += Lk_x * yValues[k]; // Suma el término completo (L_k(x) * y_k)
+            resultado += termino;
         }
+
         return resultado;
     }
 
     /**
-     * Opcional: Podríamos querer devolver los puntos de datos para mostrarlos en la vista.
-     * @return Un List de Object[] donde cada Object[] es {x, y}.
+     * Devuelve los puntos usados para la interpolación en forma de lista.
+     *
+     * @return Lista de Object[] donde cada uno contiene {x, y}.
      */
     public List<Object[]> obtenerPuntosDeDatos() {
         List<Object[]> puntos = new ArrayList<>();
